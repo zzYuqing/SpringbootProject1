@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--resultType：单条记录所封装的类型-->
+<mapper namespace="com.yoyo.mapper.DeptMapper">
+    <sql id="commonSelect">
+        select * from dept
+    </sql>
+    <delete id="deleteDept">
+        delete from dept where id=#{id}
+    </delete>
+
+    <select id="listDept" resultType="com.yoyo.pojo.Dept">
+        <include refid="commonSelect"/>
+    </select>
+
+    <insert id="insertDept">
+        insert into dept(name,create_time,update_time) values(#{name},#{createTime},#{updateTime})
+    </insert>
+    <select id="getById">
+        <include refid="commonSelect"/>
+        where id = #{id}
+    </select>
+    <update id="updateDept">
+        update dept
+        set name= #{name},
+             update_time = #{updateTime}
+        where id = #{id}
+    </update>
+</mapper>
